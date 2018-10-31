@@ -83,8 +83,8 @@ export default class RecordValues {
 
       if (_.isNumber(columnValue) || _.isString(columnValue) || _.isArray(columnValue) || _.isDate(columnValue)) {
         // don't allow dates greater than 9999, yes - they exist in the wild
-        if (_.isDate(columnValue) && columnValue.getFullYear() > 9999) {
-          columnValue = null;
+        if (_.isDate(columnValue)) {
+          columnValue = columnValue.getFullYear() > 9999 ? null : formValue.textValue;
         }
 
         this.maybeAssignArray(values, 'f' + formValue.element.key.toLowerCase(), columnValue, options.disableArrays);
