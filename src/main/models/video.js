@@ -63,7 +63,7 @@ export default class Video {
     this._bitRate = null;
 
     if (attributes.metadata) {
-      const video = attributes.metadata && attributes.metadata.streams.find(s => s.codec_type === 'video');
+      const video = attributes.metadata && attributes.metadata.streams && attributes.metadata.streams.find(s => s.codec_type === 'video');
 
       if (video) {
         this._width = video.width;
