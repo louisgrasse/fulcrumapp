@@ -62,13 +62,17 @@ export default class RecordValues {
     return statements;
   }
 
-  static maybeAssignArray(values, key, value, disableArrays) {
+  static maybeAssignArray(values, key, value, disableArrays, disableComplexTypes) {
     if (value == null) {
       return;
     }
 
-    values[key] = (_.isArray(value) && disableArrays) ? value.join(',')
-                                                      : value;
+    const disabledArrayValue = (_.isArray(value) && disableArrays) ? value.join(',')
+                                                                   : value;
+
+    const isSimple = _.isNumber(value) || _.isString(value) || _.isDate(value) || _.isBoolean(value);
+
+    values[key] = !isSimple && disableComplexTypes === true ? JSON.stringify(value) : value;
   }
 
   static columnValuesForFeature(feature, options = {}) {
@@ -87,7 +91,7 @@ export default class RecordValues {
           columnValue = columnValue.getFullYear() > 9999 ? null : formValue.textValue;
         }
 
-        this.maybeAssignArray(values, 'f' + formValue.element.key.toLowerCase(), columnValue, options.disableArrays);
+        this.maybeAssignArray(values, 'f' + formValue.element.key.toLowerCase(), columnValue, options.disableArrays, options.disableComplexTypes);
       } else if (columnValue) {
         const element = formValue.element;
 
@@ -104,10 +108,8 @@ export default class RecordValues {
         }
 
         // if array types are disabled, convert all the props to delimited values
-        if (options.disableArrays) {
-          for (const key of Object.keys(columnValue)) {
-            this.maybeAssignArray(columnValue, key, columnValue[key], options.disableArrays);
-          }
+        for (const key of Object.keys(columnValue)) {
+          this.maybeAssignArray(columnValue, key, columnValue[key], options.disableArrays, options.disableComplexTypes);
         }
 
         Object.assign(values, columnValue);
@@ -302,10 +304,10 @@ export default class RecordValues {
 
     values.form_values = JSON.stringify(feature.formValues.toJSON());
 
-    this.setupSearch(values, feature);
+    this.setupSearch(values, feature, options);
 
     if (feature.hasCoordinate) {
-      values.geometry = this.setupPoint(values, feature.latitude, feature.longitude);
+      values.geometry = this.setupPoint(values, feature.latitude, feature.longitude, options);
     } else {
       values.geometry = null;
     }
@@ -335,7 +337,7 @@ export default class RecordValues {
     values.created_horizontal_accuracy = feature.createdAccuracy;
 
     if (feature.hasCreatedCoordinate) {
-      values.created_geometry = this.setupPoint(values, feature.createdLatitude, feature.createdLongitude);
+      values.created_geometry = this.setupPoint(values, feature.createdLatitude, feature.createdLongitude, options);
     }
 
     values.updated_latitude = feature.updatedLatitude;
@@ -344,7 +346,7 @@ export default class RecordValues {
     values.updated_horizontal_accuracy = feature.updatedAccuracy;
 
     if (feature.hasUpdatedCoordinate) {
-      values.updated_geometry = this.setupPoint(values, feature.updatedLatitude, feature.updatedLongitude);
+      values.updated_geometry = this.setupPoint(values, feature.updatedLatitude, feature.updatedLongitude, options);
     }
 
     return values;
