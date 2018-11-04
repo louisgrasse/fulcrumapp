@@ -24,6 +24,7 @@ export default class Account {
       { name: 'organizationResourceID', column: 'organization_resource_id', type: 'string', null: false },
       { name: 'organizationName', column: 'organization_name', type: 'string', null: false },
       { name: 'email', column: 'email', type: 'string', null: false },
+      { name: 'description', column: 'description', type: 'string' },
       { name: 'firstName', column: 'first_name', type: 'string' },
       { name: 'lastName', column: 'last_name', type: 'string' },
       { name: 'lastSyncPhotos', column: 'last_sync_photos', type: 'datetime' },
@@ -31,7 +32,8 @@ export default class Account {
       { name: 'lastSyncAudio', column: 'last_sync_audio', type: 'datetime' },
       { name: 'lastSyncSignatures', column: 'last_sync_signatures', type: 'datetime' },
       { name: 'lastSyncChangesets', column: 'last_sync_changesets', type: 'datetime' },
-      { name: 'token', column: 'token', type: 'string' }
+      { name: 'token', column: 'token', type: 'string' },
+      { name: 'deletedAt', column: 'deleted_at', type: 'datetime' }
     ];
   }
 
