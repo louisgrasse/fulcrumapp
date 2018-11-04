@@ -64,6 +64,14 @@ export default class Record extends RecordBase {
       values.has_changes = false;
     }
 
+    if (values.draft == null) {
+      values.draft = false;
+    }
+
+    if (values.is_new == null) {
+      values.is_new = false;
+    }
+
     values.title = this.displayValue;
 
     return values;
