@@ -48,7 +48,7 @@ export default class Logger {
     this.output(WARN, null, ...args);
   }
 
-  warn = (...args) => {
+  error = (...args) => {
     this.output(ERROR, null, ...args);
   }
 
