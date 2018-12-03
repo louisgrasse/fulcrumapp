@@ -26,6 +26,10 @@ export default class Environment {
     return Environment.app._db;
   }
 
+  get logger() {
+    return Environment.app._logger;
+  }
+
   on(name, func) {
     return Environment.app.on(name, func);
   }

@@ -32,7 +32,7 @@ export default class {
     const account = await fulcrum.fetchAccount(fulcrum.args.org);
 
     if (account == null) {
-      console.error('Unable to find organization:', fulcrum.args.org);
+      fulcrum.logger.error('Unable to find organization:', fulcrum.args.org);
       return;
     }
 
@@ -54,7 +54,7 @@ export default class {
       try {
         await synchronizer.run(account, fulcrum.args.form, dataSource, {fullSync});
       } catch (ex) {
-        console.error(ex);
+        fulcrum.logger.error(ex);
       }
 
       fullSync = false;

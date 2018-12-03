@@ -71,7 +71,7 @@ export default class Migrations {
 
   log(message) {
     if (process.env.FULCRUM_DEBUG) {
-      console.log(message);
+      fulcrum.logger.log(message);
     }
   }
 

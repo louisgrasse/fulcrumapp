@@ -11,6 +11,7 @@ import LocalDatabaseDataSource from './local-database-data-source';
 import { DataSource } from 'fulcrum-core';
 import paths from '../application-paths';
 import pluginLogger from './plugin-logger';
+import Logger from './logger';
 
 let app = null;
 
@@ -30,12 +31,16 @@ class App {
     this._appPath = pathOverride || paths.userData;
     this._homePath = pathOverride || path.join(os.homedir(), '.fulcrum');
     this._dataPath = this.args.dataPath || this.appPath('data');
+    this._logPath = this.args.logPath || this.appPath('log');
     this._pluginPath = this.path('plugins');
 
     mkdirp.sync(this._appPath);
     mkdirp.sync(this._homePath);
     mkdirp.sync(this._dataPath);
+    mkdirp.sync(this._logPath);
     mkdirp.sync(this._pluginPath);
+
+    this._logger = new Logger(this._logPath);
 
     this._environment = new Environment({app: this});
   }
@@ -89,6 +94,10 @@ class App {
 
   get databaseFilePath() {
     return path.join(this.dataPath, 'fulcrum.db');
+  }
+
+  get logPath() {
+    return this._logPath;
   }
 
   get db() {

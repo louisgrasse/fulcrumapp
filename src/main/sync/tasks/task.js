@@ -88,7 +88,7 @@ export default class Task {
   progress({message, count, total}) {
     if (this._noProgress) {
       if (message !== this._lastMessage) {
-        console.log(new Date().toISOString() + ' ' + message);
+        fulcrum.logger.log(message);
         this._lastMessage = message;
       }
 

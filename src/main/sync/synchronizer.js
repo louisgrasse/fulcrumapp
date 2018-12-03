@@ -66,7 +66,7 @@ export default class Synchronizer {
       await exec(app.args.afterSyncCommand, this.afterSyncCommandOptions, 'after-sync');
     }
 
-    console.log('Synced'.green, humanizeDuration(new Date().getTime() - start));
+    fulcrum.logger.log('Synced'.green, humanizeDuration(new Date().getTime() - start));
   }
 
   get afterSyncCommandOptions() {

@@ -33,7 +33,7 @@ export default class Migration {
 
     for (let script of sql) {
       if (this.db.verbose) {
-        console.log(script, '\n');
+        fulcrum.logger.log(script, '\n');
       }
 
       results.push(await this.db.execute(script));

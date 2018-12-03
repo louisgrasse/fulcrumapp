@@ -130,7 +130,7 @@ export default class DownloadQuerySequence extends DownloadResource {
           if (json.row) {
             this.processQueryObject(json, database, (err, object) => {
               if (err) {
-                console.error('Error', err.message, err.stack);
+                fulcrum.logger.error('Error', err.message, err.stack);
                 return done(err);
               }
 
@@ -145,12 +145,12 @@ export default class DownloadQuerySequence extends DownloadResource {
         };
 
         const onInvalid = (data, done) => {
-          console.error('Invalid', data && data.toString());
+          fulcrum.logger.error('Invalid', data && data.toString());
           done(new Error('invalid JSON sequence'));
         };
 
         const onTruncated = (data, done) => {
-          console.error('Truncated:', data && data.toString());
+          fulcrum.logger.error('Truncated:', data && data.toString());
           done(new Error('truncated JSON sequence'));
         };
 

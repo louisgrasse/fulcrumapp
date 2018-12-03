@@ -82,19 +82,19 @@ export default class {
     if (response.statusCode === 200) {
       const user = JSON.parse(body).user;
 
-      console.log(('Successfully authenticated with ' + user.email).green);
+      fulcrum.logger.log(('Successfully authenticated with ' + user.email).green);
 
       const context = user.contexts.find(o => o.name === fulcrum.args.org);
 
       if (!context) {
-        console.error(`Organization ${ fulcrum.args.org } not found for this account.`.red);
+        fulcrum.logger.error(`Organization ${ fulcrum.args.org } not found for this account.`.red);
         return false;
       }
 
       const isOwner = context.role.name === 'Owner' && context.role.is_system;
 
       if (!isOwner) {
-        console.error(`This account is not an owner of ${ fulcrum.args.org }. You must be an account owner to use Fulcrum Desktop.`.red);
+        fulcrum.logger.error(`This account is not an owner of ${ fulcrum.args.org }. You must be an account owner to use Fulcrum Desktop.`.red);
         return false;
       }
 
@@ -115,11 +115,11 @@ export default class {
 
       await account.save();
 
-      console.log('✓'.green, context.name);
+      fulcrum.logger.log('✓'.green, context.name);
 
       return true;
     } else {
-      console.log('Username or password incorrect'.red);
+      fulcrum.logger.log('Username or password incorrect'.red);
     }
 
     return false;

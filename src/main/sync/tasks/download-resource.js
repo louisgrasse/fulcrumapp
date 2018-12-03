@@ -71,7 +71,7 @@ export default class DownloadResource extends Task {
   }
 
   fail(account, results) {
-    console.log(account.organizationName.green, 'failed'.red);
+    fulcrum.logger.log(account.organizationName.green, 'failed'.red);
   }
 
   async run({dataSource}) {

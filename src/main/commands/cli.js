@@ -49,7 +49,7 @@ export default class CLI {
     }
 
     if (this.args.debug) {
-      console.log(this.args);
+      fulcrum.logger.log(this.args);
     }
 
     await this.app.initialize();
@@ -166,7 +166,7 @@ export default class CLI {
       await this.run();
       await this.destroy();
     } catch (err) {
-      console.error(err.stack);
+      fulcrum.logger.error(err.stack);
       await this.destroy();
     }
 
@@ -200,5 +200,5 @@ export default class CLI {
 
 new CLI().start().then(() => {
 }).catch((err) => {
-  console.error(err);
+  fulcrum.logger.error(err);
 });
