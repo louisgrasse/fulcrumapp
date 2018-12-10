@@ -412,17 +412,21 @@ export default class RecordValues {
   static multipleValueTableNameWithForm(form, options) {
     const prefix = options && options.schema ? options.schema + '.' : '';
 
-    return format('%saccount_%s_form_%s_values', prefix, form._accountRowID, form.rowID);
+    return format('%s%sform_%s_values', prefix, this.accountPrefix(form, options), form.rowID);
   }
 
   static tableNameWithForm(form, repeatable, options) {
     const prefix = options && options.schema ? options.schema + '.' : '';
 
     if (repeatable == null) {
-      return format('%saccount_%s_form_%s', prefix, form._accountRowID, form.rowID);
+      return format('%s%sform_%s', prefix, this.accountPrefix(form, options), form.rowID);
     }
 
-    return format('%saccount_%s_form_%s_%s', prefix, form._accountRowID, form.rowID, repeatable.key);
+    return format('%s%sform_%s_%s', prefix, this.accountPrefix(form, options), form.rowID, repeatable.key);
+  }
+
+  static accountPrefix(form, options) {
+    return options.accountPrefix != null ? 'account_' + form._accountRowID + '_' : '';
   }
 
   static setupSearch(values, feature) {
