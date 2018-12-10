@@ -1,6 +1,6 @@
 import { format } from 'util';
 import _ from 'lodash';
-import { Record, RepeatableItemValue } from 'fulcrum-core';
+import { Record, RepeatableItemValue, DateUtils } from 'fulcrum-core';
 import pgformat from 'pg-format';
 
 export default class RecordValues {
@@ -83,9 +83,15 @@ export default class RecordValues {
         continue;
       }
 
+      const element = formValue.element;
+
       let columnValue = formValue.columnValue;
 
       if (_.isNumber(columnValue) || _.isString(columnValue) || _.isArray(columnValue) || _.isDate(columnValue)) {
+        if (options.calculatedFieldDateFormat === 'date' && element.isCalculatedElement && element.display.isDate) {
+          columnValue = DateUtils.parseDate(formValue.textValue);
+        }
+
         // don't allow dates greater than 9999, yes - they exist in the wild
         if (_.isDate(columnValue)) {
           columnValue = columnValue.getFullYear() > 9999 ? null : formValue.textValue;
@@ -93,7 +99,6 @@ export default class RecordValues {
 
         this.maybeAssignArray(values, 'f' + formValue.element.key.toLowerCase(), columnValue, options.disableArrays, options.disableComplexTypes);
       } else if (columnValue) {
-        const element = formValue.element;
 
         if (element && options.mediaURLFormatter) {
           if (element.isPhotoElement || element.isVideoElement || element.isAudioElement) {

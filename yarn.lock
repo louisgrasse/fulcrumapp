@@ -1475,11 +1475,7 @@ convert-source-map@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.4.0.tgz#e3dad195bf61bfe13a7a3c73e9876ec14a0268f3"
 
-core-js@^2.4.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
-
-core-js@^2.5.0:
+core-js@^2.4.0, core-js@^2.5.0:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
 
@@ -2326,9 +2322,9 @@ fstream@^1.0.0, fstream@^1.0.10, fstream@^1.0.2, fstream@~1.0.10:
     mkdirp ">=0.5 0"
     rimraf "2"
 
-fulcrum-core@^0.10.12:
-  version "0.10.12"
-  resolved "https://registry.yarnpkg.com/fulcrum-core/-/fulcrum-core-0.10.12.tgz#367f992d974d91fee05eda1b50a99c9164d12be2"
+fulcrum-core@^0.10.13:
+  version "0.10.13"
+  resolved "https://registry.yarnpkg.com/fulcrum-core/-/fulcrum-core-0.10.13.tgz#173bcd2af3a6530d99f7fbf193f6e7540c08fca0"
   dependencies:
     async "^2.1.4"
     lodash.compact "^3.0.1"
@@ -2340,23 +2336,23 @@ fulcrum-core@^0.10.12:
     relative-date "^1.1.3"
     uuid "^3.0.1"
 
-fulcrum-query-sql@^0.0.91:
-  version "0.0.91"
-  resolved "https://registry.yarnpkg.com/fulcrum-query-sql/-/fulcrum-query-sql-0.0.91.tgz#5166c7a0a2ee516caa406b223c221b6cfe910529"
+fulcrum-query-sql@^0.0.96:
+  version "0.0.96"
+  resolved "https://registry.yarnpkg.com/fulcrum-query-sql/-/fulcrum-query-sql-0.0.96.tgz#0cbefd2c7135886c1c75f35418e61ed5068e3a58"
   dependencies:
     array-move "^1.0.0"
-    fulcrum-core "^0.10.12"
+    fulcrum-core "^0.10.13"
     lodash "^4.16.2"
     moment "^2.17.1"
     moment-timezone "^0.5.11"
     pg-query-deparser "github:zhm/pg-query-deparser#master"
 
-fulcrum-schema@^2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/fulcrum-schema/-/fulcrum-schema-2.0.9.tgz#c881d19ac58de37b23f8232716d767a3721a3744"
+fulcrum-schema@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/fulcrum-schema/-/fulcrum-schema-2.0.11.tgz#d3bc1ca7235047acedb9748752d9089f035da9f5"
   dependencies:
     babel-polyfill "^6.9.0"
-    sqldiff "^0.0.26"
+    sqldiff "^0.0.27"
     underscore "^1.8.3"
 
 function-bind@^1.0.2, function-bind@^1.1.0:
@@ -3048,13 +3044,13 @@ lodash.trim@^4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/lodash.trim/-/lodash.trim-4.5.1.tgz#36425e7ee90be4aa5e27bcebb85b7d11ea47aa57"
 
-lodash@^4.0.0, lodash@^4.11.1, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.1:
+lodash@^4.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
-lodash@^4.16.2, lodash@^4.17.10:
-  version "4.17.10"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
+lodash@^4.13.1, lodash@^4.16.2, lodash@^4.17.10:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
 log-symbols@^1.0.2:
   version "1.0.2"
@@ -3235,8 +3231,8 @@ mocha@^2.4.5:
     to-iso-string "0.0.2"
 
 moment-timezone@^0.5.11:
-  version "0.5.20"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.20.tgz#fe66da425dd9f9bbf416f131bf17659680aabb99"
+  version "0.5.23"
+  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.23.tgz#7cbb00db2c14c71b19303cb47b0fb0a6d8651463"
   dependencies:
     moment ">= 2.9.0"
 
@@ -3695,7 +3691,7 @@ pg-pool@1.*:
 
 "pg-query-deparser@github:zhm/pg-query-deparser#master":
   version "0.0.1"
-  resolved "https://codeload.github.com/zhm/pg-query-deparser/tar.gz/c1bf990ed3aae2f65116fa04308e0eedc195050e"
+  resolved "https://codeload.github.com/zhm/pg-query-deparser/tar.gz/7d44b27f8fd3c77f5394fe9e5c59198cfaf58809"
   dependencies:
     lodash "^4.13.1"
 
@@ -4401,9 +4397,9 @@ sprintf-js@~1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
 
-sqldiff@^0.0.26:
-  version "0.0.26"
-  resolved "https://registry.yarnpkg.com/sqldiff/-/sqldiff-0.0.26.tgz#a3d0607b357da64465f9cea35235692f4f9a2455"
+sqldiff@^0.0.27:
+  version "0.0.27"
+  resolved "https://registry.yarnpkg.com/sqldiff/-/sqldiff-0.0.27.tgz#9a9980cc560f2e1dccd4c2223bac6ea71ffa8896"
   dependencies:
     underscore "^1.7.0"
 
@@ -4816,13 +4812,9 @@ uuid@^2.0.1, uuid@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
-uuid@^3.0.0, uuid@^3.3.2:
+uuid@^3.0.0, uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
-
-uuid@^3.0.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
 
 v8flags@^2.0.10:
   version "2.0.11"

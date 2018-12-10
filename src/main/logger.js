@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 const LOG = 'log';
-const WARN = 'warning';
+const WARN = 'warn';
 const ERROR = 'error';
 
 const LEVELS = {
