@@ -34,9 +34,9 @@ export default class RecordValues {
 
     if (feature instanceof RepeatableItemValue) {
       // TODO(zhm) add public interface for accessing _element, like `get repeatableElement()`
-      tableName = this.tableNameWithForm(form, feature._element, options);
+      tableName = this.tableNameWithFormAndSchema(form, feature._element, options);
     } else {
-      tableName = this.tableNameWithForm(form, null, options);
+      tableName = this.tableNameWithFormAndSchema(form, null, options);
     }
 
     if (options.valuesTransformer) {
@@ -370,12 +370,12 @@ export default class RecordValues {
 
     const statements = [];
 
-    let tableName = this.tableNameWithForm(form, null, options);
+    let tableName = this.tableNameWithFormAndSchema(form, null, options);
 
     statements.push(this.deleteRowsForRecordStatement(db, record, tableName));
 
     for (const repeatable of repeatables) {
-      tableName = this.tableNameWithForm(form, repeatable, options);
+      tableName = this.tableNameWithFormAndSchema(form, repeatable, options);
 
       statements.push(this.deleteRowsForRecordStatement(db, record, tableName));
     }
@@ -392,12 +392,12 @@ export default class RecordValues {
 
     const statements = [];
 
-    let tableName = this.tableNameWithForm(form, null, options);
+    let tableName = this.tableNameWithFormAndSchema(form, null, options);
 
     statements.push(this.deleteRowsStatement(db, tableName));
 
     for (const repeatable of repeatables) {
-      tableName = this.tableNameWithForm(form, repeatable, options);
+      tableName = this.tableNameWithFormAndSchema(form, repeatable, options);
 
       statements.push(this.deleteRowsStatement(db, tableName));
     }
@@ -410,23 +410,35 @@ export default class RecordValues {
   }
 
   static multipleValueTableNameWithForm(form, options) {
-    const prefix = options && options.schema ? options.schema + '.' : '';
+    return this.tableNameWithFormAndSchema(form, null, options, '_values');
+  }
 
-    return format('%s%sform_%s_values', prefix, this.accountPrefix(form, options), form.rowID);
+  static tableNameWithFormAndSchema(form, repeatable, options, suffix) {
+    const tableName = this.tableNameWithForm(form, repeatable, options);
+
+    suffix = suffix || '';
+
+    if (options.schema) {
+      return options.escapeIdentifier(options.schema) + '.' + options.escapeIdentifier(tableName + suffix);
+    }
+
+    return options.escapeIdentifier(tableName + suffix);
   }
 
   static tableNameWithForm(form, repeatable, options) {
-    const prefix = options && options.schema ? options.schema + '.' : '';
-
     if (repeatable == null) {
-      return format('%s%sform_%s', prefix, this.accountPrefix(form, options), form.rowID);
+      return format('%sform_%s', this.accountPrefix(form, options), this.formIdentifier(form, options));
     }
 
-    return format('%s%sform_%s_%s', prefix, this.accountPrefix(form, options), form.rowID, repeatable.key);
+    return format('%sform_%s_%s', this.accountPrefix(form, options), this.formIdentifier(form, options), repeatable.key);
   }
 
   static accountPrefix(form, options) {
     return options.accountPrefix != null ? 'account_' + form._accountRowID + '_' : '';
+  }
+
+  static formIdentifier(form, options) {
+    return options.persistentTableNames ? form.id : form.rowID;
   }
 
   static setupSearch(values, feature) {
