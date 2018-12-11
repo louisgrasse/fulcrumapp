@@ -77,8 +77,15 @@ export default class Record extends RecordBase {
     return values;
   }
 
+  get recordValueOptions() {
+    return {
+      escapeIdentifier: (value) => this.db.ident(value),
+      accountPrefix: 'account_' + this.accountRowID
+    };
+  }
+
   async afterSave(options) {
-    const statements = SQLiteRecordValues.updateForRecordStatements(this.db, this);
+    const statements = SQLiteRecordValues.updateForRecordStatements(this.db, this, this.recordValueOptions);
 
     await this.db.execute(statements.map(o => o.sql).join('\n'));
   }
@@ -88,7 +95,7 @@ export default class Record extends RecordBase {
   }
 
   async beforeDelete(options) {
-    const statements = SQLiteRecordValues.deleteForRecordStatements(this.db, this, this.form);
+    const statements = SQLiteRecordValues.deleteForRecordStatements(this.db, this, this.form, this.recordValueOptions);
 
     await this.db.execute(statements.map(o => o.sql).join('\n'));
   }
