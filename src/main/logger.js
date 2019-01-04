@@ -1,6 +1,7 @@
 import { format } from 'util';
 import fs from 'fs';
 import path from 'path';
+import moment from 'moment';
 
 const LOG = 'log';
 const WARN = 'warn';
@@ -15,13 +16,16 @@ const LEVELS = {
 export default class Logger {
   constructor(logPath) {
     this._path = logPath;
-    this._logFilePath = path.join(this._path, 'fulcrum.log');
   }
 
   write(content) {
     if (content != null) {
-      fs.appendFileSync(this._logFilePath, content.toString() + '\n');
+      fs.appendFileSync(this.logFilePath, content.toString() + '\n');
     }
+  }
+
+  get logFilePath() {
+    return path.join(this._path, `fulcrum-${ moment().format('YYYY-MM-DD') }.log`);
   }
 
   withContext = (context) => {
