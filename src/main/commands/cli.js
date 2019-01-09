@@ -166,6 +166,7 @@ export default class CLI {
       await this.run();
       await this.destroy();
     } catch (err) {
+      process.exitCode = 1;
       fulcrum.logger.error(err.stack);
       await this.destroy();
     }
@@ -200,5 +201,6 @@ export default class CLI {
 
 new CLI().start().then(() => {
 }).catch((err) => {
+  process.exitCode = 1;
   fulcrum.logger.error(err);
 });
