@@ -2,15 +2,18 @@ import { format } from 'util';
 import fs from 'fs';
 import path from 'path';
 import moment from 'moment';
+import env from './environment';
 
 const LOG = 'log';
 const WARN = 'warn';
 const ERROR = 'error';
+const INFO = 'info';
 
 const LEVELS = {
   log: LOG,
   warn: WARN,
-  error: ERROR
+  error: ERROR,
+  info: INFO
 };
 
 export default class Logger {
@@ -35,13 +38,16 @@ export default class Logger {
       log: (...args) => this.output(LOG, context, ...args),
       warn: (...args) => this.output(WARN, context, ...args),
       error: (...args) => this.output(ERROR, context, ...args),
+      info: (...args) => this.output(INFO, context, ...args)
     };
   }
 
   output = (level, context, ...args) => {
     this.write(this.prefix(LEVELS[level] || LOG, context) + ' ' + format(...args));
 
-    console[level](...args);
+    if (level !== INFO && !fulcrum.args.debug) {
+      console[level](...args);
+    }
   }
 
   log = (...args) => {
@@ -54,6 +60,10 @@ export default class Logger {
 
   error = (...args) => {
     this.output(ERROR, null, ...args);
+  }
+
+  info = (...args) => {
+    this.output(INFO, null, ...args);
   }
 
   prefix(level, context) {
