@@ -46,6 +46,10 @@ export default class Photo {
     return this._id;
   }
 
+  integerValue(value) {
+    return Array.isArray(value) ? value[0] : value;
+  }
+
   updateFromAPIAttributes(attributes) {
     this._id = attributes.access_key;
     this._exif = attributes.exif;
@@ -69,8 +73,8 @@ export default class Photo {
       this._altitude = exif.gps_altitude;
       this._direction = exif.gps_img_direction;
       this._accuracy = exif.gps_dop;
-      this._width = exif.pixel_x_dimension;
-      this._height = exif.pixel_y_dimension;
+      this._width = this.integerValue(exif.pixel_x_dimension);
+      this._height = this.integerValue(exif.pixel_y_dimension);
       this._make = exif.make;
       this._model = exif.model;
       this._software = exif.software;
