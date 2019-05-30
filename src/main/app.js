@@ -45,6 +45,10 @@ class App {
     this._environment = new Environment({app: this});
   }
 
+  get pluginsByName() {
+    return this._pluginsByName;
+  }
+
   get environment() {
     return this._environment;
   }
@@ -165,7 +169,7 @@ class App {
 
         const plugin = new PluginClass();
 
-        const nameParts = path.dirname(fullPath).split(path.sep);
+        const nameParts = fullPath.split(path.sep);
         const name = nameParts[nameParts.length - 1].replace(/^fulcrum-desktop-/, '');
 
         this._pluginsByName[name] = plugin;

@@ -29,11 +29,12 @@ export default class {
     await this.app.activatePlugins();
 
     const account = await fulcrum.fetchAccount(fulcrum.args.org);
+    const app = this.app;
 
     const code = fulcrum.args.file ? fs.readFileSync(fulcrum.args.file).toString() : fulcrum.args.code;
 
     if (code) {
-      eval(code);
+      await eval(code);
       return;
     }
 

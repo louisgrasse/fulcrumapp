@@ -1,6 +1,6 @@
 {
   "name": "Fulcrum",
-  "version": "0.0.79",
+  "version": "0.0.80",
   "electron": "1.6.6",
   "description": "Fulcrum",
   "homepage": "http://github.com/fulcrumapp/fulcrum-desktop",
