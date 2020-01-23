@@ -9,7 +9,7 @@ query tables. It's intended to be the foundation for local/disconnected data syn
 
 ### Documentation
 
-http://developer.fulcrumapp.com/desktop/intro/
+https://learn.fulcrumapp.com/dev/desktop/intro/
 
 ### Development
 
